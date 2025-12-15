@@ -1,4 +1,5 @@
 import { Github, Linkedin, Download, Mail } from "lucide-react";
+import profilePhoto from "@/assets/profile-photo.jpeg";
 
 const AboutSection = () => {
   return (
@@ -7,9 +8,11 @@ const AboutSection = () => {
         {/* Profile Image */}
         <div className="relative animate-float">
           <div className="w-64 h-64 md:w-80 md:h-80 lg:w-96 lg:h-96 rounded-full overflow-hidden gradient-border">
-            <div className="w-full h-full rounded-full bg-gradient-to-br from-primary/20 to-secondary/20 flex items-center justify-center">
-              <span className="text-6xl md:text-8xl font-bold gradient-text">LS</span>
-            </div>
+            <img 
+              src={profilePhoto} 
+              alt="Lebohang Senyane" 
+              className="w-full h-full object-cover"
+            />
           </div>
           <div className="absolute -inset-4 bg-gradient-to-r from-primary/20 to-secondary/20 rounded-full blur-2xl -z-10" />
         </div>
@@ -34,10 +37,14 @@ const AboutSection = () => {
 
           {/* Buttons */}
           <div className="flex flex-wrap items-center justify-center lg:justify-start gap-4">
-            <button className="flex items-center gap-2 px-6 py-3 rounded-full border-2 border-foreground/20 font-medium transition-all duration-300 hover:bg-foreground hover:text-background hover:border-foreground">
+            <a 
+              href="/LebohangSenyane_CV.docx"
+              download="LebohangSenyane_CV.docx"
+              className="flex items-center gap-2 px-6 py-3 rounded-full border-2 border-foreground/20 font-medium transition-all duration-300 hover:bg-foreground hover:text-background hover:border-foreground"
+            >
               <Download size={18} />
               Download CV
-            </button>
+            </a>
             <a 
               href="#contact"
               onClick={(e) => {
