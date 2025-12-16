@@ -27,19 +27,20 @@ const AboutSection = () => {
               Lebohang Senyane
             </h1>
             <p className="text-2xl md:text-3xl font-semibold gradient-text">
-              Security Analyst
+              AI Engineer
             </p>
           </div>
 
           <p className="text-muted-foreground max-w-md text-lg">
-            Passionate about cybersecurity, AI, and building innovative solutions that make a difference.
+            Passionate about AI, machine learning, and building intelligent solutions that transform how we interact with technology.
           </p>
 
           {/* Buttons */}
           <div className="flex flex-wrap items-center justify-center lg:justify-start gap-4">
             <a 
-              href="/LebohangSenyane_CV.docx"
-              download="LebohangSenyane_CV.docx"
+              href="https://docs.google.com/document/d/13f173z33JNONhLJiDbkwADtgNhFOgN54xO4M07DEeag/edit?usp=sharing"
+              target="_blank"
+              rel="noopener noreferrer"
               className="flex items-center gap-2 px-6 py-3 rounded-full border-2 border-foreground/20 font-medium transition-all duration-300 hover:bg-foreground hover:text-background hover:border-foreground"
             >
               <Download size={18} />
