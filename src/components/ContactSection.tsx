@@ -60,9 +60,8 @@ const ContactSection = () => {
           {/* Contact Info */}
           <div className="space-y-8">
             <p className="text-lg text-muted-foreground">
-              I'm always open to discussing new opportunities, interesting
-              projects, or just having a friendly chat about technology and
-              security.
+              I'm always open to discussing AI innovations, machine learning projects, 
+              or exploring how intelligent solutions can solve real-world problems.
             </p>
 
             <div className="space-y-4">
