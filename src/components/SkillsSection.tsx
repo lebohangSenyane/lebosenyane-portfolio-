@@ -183,47 +183,55 @@ const SkillsSection = () => {
             const y = Math.sin(angle) * innerRadius;
 
             return (
-              <TooltipProvider key={skill.name} delayDuration={0}>
-                <Tooltip open={selectedSkill === skill.name}>
-                  <TooltipTrigger asChild>
-                    <div
-                      data-skill-node
-                      className={`
-                        absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2
-                        transition-all duration-300 cursor-pointer
-                        ${selectedSkill === skill.name ? "scale-125 z-20" : "scale-100"}
-                        ${isVisible ? "opacity-100" : "opacity-0"}
-                      `}
-                      style={{
-                        transform: `translate(calc(-50% + ${x}px), calc(-50% + ${y}px))`,
-                        transitionDelay: `${index * 50}ms`,
-                      }}
-                      onClick={(e) => handleSkillClick(skill.name, e)}
-                    >
-                      <div className={`
-                        px-3 py-2 rounded-full glass flex items-center gap-2
-                        border border-primary/30 bg-background/80
-                        hover:bg-primary/20 hover:border-primary/50
-                        hover:shadow-lg hover:shadow-primary/20
-                        transition-all duration-300
-                        ${selectedSkill === skill.name ? "ring-2 ring-primary/50 bg-primary/20" : ""}
-                      `}>
-                        <span className="text-primary">{skill.icon}</span>
-                        <span className="text-xs font-medium text-foreground whitespace-nowrap">
-                          {skill.name}
-                        </span>
+              <div
+                key={skill.name}
+                className={`
+                  absolute top-1/2 left-1/2
+                  ${isPaused ? "" : "animate-spin-slow-reverse"}
+                `}
+                style={{
+                  transform: `translate(calc(-50% + ${x}px), calc(-50% + ${y}px))`,
+                  animationPlayState: isPaused ? "paused" : "running",
+                }}
+              >
+                <TooltipProvider delayDuration={0}>
+                  <Tooltip open={selectedSkill === skill.name}>
+                    <TooltipTrigger asChild>
+                      <div
+                        data-skill-node
+                        className={`
+                          transition-all duration-300 cursor-pointer
+                          ${selectedSkill === skill.name ? "scale-125 z-20" : "scale-100"}
+                          ${isVisible ? "opacity-100" : "opacity-0"}
+                        `}
+                        style={{ transitionDelay: `${index * 50}ms` }}
+                        onClick={(e) => handleSkillClick(skill.name, e)}
+                      >
+                        <div className={`
+                          px-3 py-2 rounded-full glass flex items-center gap-2
+                          border border-primary/30 bg-background/80
+                          hover:bg-primary/20 hover:border-primary/50
+                          hover:shadow-lg hover:shadow-primary/20
+                          transition-all duration-300
+                          ${selectedSkill === skill.name ? "ring-2 ring-primary/50 bg-primary/20" : ""}
+                        `}>
+                          <span className="text-primary">{skill.icon}</span>
+                          <span className="text-xs font-medium text-foreground whitespace-nowrap">
+                            {skill.name}
+                          </span>
+                        </div>
                       </div>
-                    </div>
-                  </TooltipTrigger>
-                  <TooltipContent 
-                    side="top" 
-                    className="max-w-xs bg-background/95 backdrop-blur-md border-primary/30 p-3"
-                  >
-                    <p className="font-semibold text-primary mb-1">{skill.name}</p>
-                    <p className="text-sm text-muted-foreground">{skill.description}</p>
-                  </TooltipContent>
-                </Tooltip>
-              </TooltipProvider>
+                    </TooltipTrigger>
+                    <TooltipContent 
+                      side="top" 
+                      className="max-w-xs bg-background/95 backdrop-blur-md border-primary/30 p-3 z-50"
+                    >
+                      <p className="font-semibold text-primary mb-1">{skill.name}</p>
+                      <p className="text-sm text-muted-foreground">{skill.description}</p>
+                    </TooltipContent>
+                  </Tooltip>
+                </TooltipProvider>
+              </div>
             );
           })}
         </div>
@@ -239,47 +247,55 @@ const SkillsSection = () => {
             const y = Math.sin(angle) * outerRadius;
 
             return (
-              <TooltipProvider key={skill.name} delayDuration={0}>
-                <Tooltip open={selectedSkill === skill.name}>
-                  <TooltipTrigger asChild>
-                    <div
-                      data-skill-node
-                      className={`
-                        absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2
-                        transition-all duration-300 cursor-pointer
-                        ${selectedSkill === skill.name ? "scale-125 z-20" : "scale-100"}
-                        ${isVisible ? "opacity-100" : "opacity-0"}
-                      `}
-                      style={{
-                        transform: `translate(calc(-50% + ${x}px), calc(-50% + ${y}px))`,
-                        transitionDelay: `${(mlSkills.length + index) * 50}ms`,
-                      }}
-                      onClick={(e) => handleSkillClick(skill.name, e)}
-                    >
-                      <div className={`
-                        px-3 py-2 rounded-full glass flex items-center gap-2
-                        border border-secondary/30 bg-background/80
-                        hover:bg-secondary/20 hover:border-secondary/50
-                        hover:shadow-lg hover:shadow-secondary/20
-                        transition-all duration-300
-                        ${selectedSkill === skill.name ? "ring-2 ring-secondary/50 bg-secondary/20" : ""}
-                      `}>
-                        <span className="text-secondary">{skill.icon}</span>
-                        <span className="text-xs font-medium text-foreground whitespace-nowrap">
-                          {skill.name}
-                        </span>
+              <div
+                key={skill.name}
+                className={`
+                  absolute top-1/2 left-1/2
+                  ${isPaused ? "" : "animate-spin-slow"}
+                `}
+                style={{
+                  transform: `translate(calc(-50% + ${x}px), calc(-50% + ${y}px))`,
+                  animationPlayState: isPaused ? "paused" : "running",
+                }}
+              >
+                <TooltipProvider delayDuration={0}>
+                  <Tooltip open={selectedSkill === skill.name}>
+                    <TooltipTrigger asChild>
+                      <div
+                        data-skill-node
+                        className={`
+                          transition-all duration-300 cursor-pointer
+                          ${selectedSkill === skill.name ? "scale-125 z-20" : "scale-100"}
+                          ${isVisible ? "opacity-100" : "opacity-0"}
+                        `}
+                        style={{ transitionDelay: `${(mlSkills.length + index) * 50}ms` }}
+                        onClick={(e) => handleSkillClick(skill.name, e)}
+                      >
+                        <div className={`
+                          px-3 py-2 rounded-full glass flex items-center gap-2
+                          border border-secondary/30 bg-background/80
+                          hover:bg-secondary/20 hover:border-secondary/50
+                          hover:shadow-lg hover:shadow-secondary/20
+                          transition-all duration-300
+                          ${selectedSkill === skill.name ? "ring-2 ring-secondary/50 bg-secondary/20" : ""}
+                        `}>
+                          <span className="text-secondary">{skill.icon}</span>
+                          <span className="text-xs font-medium text-foreground whitespace-nowrap">
+                            {skill.name}
+                          </span>
+                        </div>
                       </div>
-                    </div>
-                  </TooltipTrigger>
-                  <TooltipContent 
-                    side="top" 
-                    className="max-w-xs bg-background/95 backdrop-blur-md border-secondary/30 p-3"
-                  >
-                    <p className="font-semibold text-secondary mb-1">{skill.name}</p>
-                    <p className="text-sm text-muted-foreground">{skill.description}</p>
-                  </TooltipContent>
-                </Tooltip>
-              </TooltipProvider>
+                    </TooltipTrigger>
+                    <TooltipContent 
+                      side="top" 
+                      className="max-w-xs bg-background/95 backdrop-blur-md border-secondary/30 p-3 z-50"
+                    >
+                      <p className="font-semibold text-secondary mb-1">{skill.name}</p>
+                      <p className="text-sm text-muted-foreground">{skill.description}</p>
+                    </TooltipContent>
+                  </Tooltip>
+                </TooltipProvider>
+              </div>
             );
           })}
         </div>
