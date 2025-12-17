@@ -92,6 +92,7 @@ const skills: Skill[] = [
 const SkillsSection = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [selectedSkill, setSelectedSkill] = useState<string | null>(null);
+  const [hoveredSkill, setHoveredSkill] = useState<string | null>(null);
   const [isMobile, setIsMobile] = useState(false);
   const sectionRef = useRef<HTMLElement>(null);
 
@@ -125,11 +126,12 @@ const SkillsSection = () => {
       const target = e.target as HTMLElement;
       if (!target.closest('[data-skill-node]')) {
         setSelectedSkill(null);
+        setHoveredSkill(null);
       }
     };
 
-    document.addEventListener('click', handleClickOutside);
-    return () => document.removeEventListener('click', handleClickOutside);
+    document.addEventListener("click", handleClickOutside);
+    return () => document.removeEventListener("click", handleClickOutside);
   }, []);
 
   const mlSkills = skills.filter((s) => s.group === "ml");
@@ -137,185 +139,136 @@ const SkillsSection = () => {
 
   const handleSkillClick = (skillName: string, e: React.MouseEvent) => {
     e.stopPropagation();
-    setSelectedSkill(selectedSkill === skillName ? null : skillName);
+    setSelectedSkill((prev) => (prev === skillName ? null : skillName));
   };
 
-  // Desktop: Orbiting layout
+  // Desktop: Orbiting layout (single orbit)
   const OrbitingNetwork = () => {
-    const innerRadius = 140;
-    const outerRadius = 220;
-    const isPaused = selectedSkill !== null;
+    const orbitRadius = 200;
+    const orbitSkills = skills;
+
+    const isPaused = Boolean(selectedSkill || hoveredSkill);
 
     return (
-      <div className="relative w-[500px] h-[500px] mx-auto">
-        {/* Orbit paths */}
-        <div className="absolute inset-0 flex items-center justify-center">
-          <div 
-            className="absolute rounded-full border border-primary/20"
-            style={{ width: innerRadius * 2 + 60, height: innerRadius * 2 + 60 }}
-          />
-          <div 
-            className="absolute rounded-full border border-secondary/20"
-            style={{ width: outerRadius * 2 + 60, height: outerRadius * 2 + 60 }}
-          />
-        </div>
+      <TooltipProvider delayDuration={0}>
+        <div className="relative w-[520px] h-[520px] mx-auto">
+          {/* Orbit path */}
+          <div className="absolute inset-0 flex items-center justify-center">
+            <div
+              className="absolute rounded-full border border-primary/20"
+              style={{ width: orbitRadius * 2 + 60, height: orbitRadius * 2 + 60 }}
+            />
+          </div>
 
-        {/* Central node */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-10">
-          <div className="w-28 h-28 rounded-full glass flex items-center justify-center bg-gradient-to-br from-primary/30 to-secondary/30 border-2 border-primary/40 shadow-lg shadow-primary/20">
-            <div className="text-center">
-              <Brain className="w-8 h-8 mx-auto text-primary mb-1" />
-              <span className="text-xs font-semibold text-foreground leading-tight block">
-                AI & ML
-              </span>
+          {/* Central node */}
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-10">
+            <div className="w-28 h-28 rounded-full glass flex items-center justify-center bg-gradient-to-br from-primary/30 to-secondary/30 border-2 border-primary/40 shadow-lg shadow-primary/20">
+              <div className="text-center">
+                <Brain className="w-8 h-8 mx-auto text-primary mb-1" />
+                <span className="text-xs font-semibold text-foreground leading-tight block">
+                  AI &amp; ML
+                </span>
+              </div>
+            </div>
+          </div>
+
+          {/* Orbiting skills */}
+          <div
+            className={`absolute inset-0 ${isPaused ? "" : "animate-spin-slow"}`}
+            style={{ animationPlayState: isPaused ? "paused" : "running" }}
+          >
+            {orbitSkills.map((skill, index) => {
+              const angle = (index / orbitSkills.length) * 2 * Math.PI - Math.PI / 2;
+              const x = Math.cos(angle) * orbitRadius;
+              const y = Math.sin(angle) * orbitRadius;
+
+              const isActive = selectedSkill === skill.name || hoveredSkill === skill.name;
+              const isML = skill.group === "ml";
+
+              return (
+                <div
+                  key={skill.name}
+                  className="absolute top-1/2 left-1/2"
+                  style={{ marginLeft: x, marginTop: y }}
+                >
+                  {/* Counter-rotate so badge stays upright while the orbit rotates */}
+                  <div
+                    className={isPaused ? "" : "animate-spin-slow-reverse"}
+                    style={{ animationPlayState: isPaused ? "paused" : "running" }}
+                  >
+                    <Tooltip
+                      open={selectedSkill === skill.name || hoveredSkill === skill.name}
+                      onOpenChange={(open) => {
+                        // Hover/focus drives hoveredSkill; click drives selectedSkill
+                        setHoveredSkill(open ? skill.name : null);
+                      }}
+                    >
+                      <TooltipTrigger asChild>
+                        <button
+                          type="button"
+                          data-skill-node
+                          aria-label={`${skill.name}: ${skill.description}`}
+                          className={
+                            `transition-all duration-300 cursor-pointer outline-none ` +
+                            `${isActive ? "scale-125 z-20" : "scale-100 hover:scale-110"} ` +
+                            `${isVisible ? "opacity-100" : "opacity-0"}`
+                          }
+                          style={{ transitionDelay: `${index * 40}ms` }}
+                          onClick={(e) => handleSkillClick(skill.name, e)}
+                        >
+                          <div
+                            className={
+                              `px-3 py-2 rounded-full glass flex items-center gap-2 ` +
+                              `bg-background/80 transition-all duration-300 ` +
+                              (isML
+                                ? `border border-primary/30 hover:bg-primary/20 hover:border-primary/50 hover:shadow-lg hover:shadow-primary/20 `
+                                : `border border-secondary/30 hover:bg-secondary/20 hover:border-secondary/50 hover:shadow-lg hover:shadow-secondary/20 `) +
+                              (isActive
+                                ? isML
+                                  ? "ring-2 ring-primary/50 bg-primary/20"
+                                  : "ring-2 ring-secondary/50 bg-secondary/20"
+                                : "")
+                            }
+                          >
+                            <span className={isML ? "text-primary" : "text-secondary"}>{skill.icon}</span>
+                            <span className="text-xs font-medium text-foreground whitespace-nowrap">
+                              {skill.name}
+                            </span>
+                          </div>
+                        </button>
+                      </TooltipTrigger>
+                      <TooltipContent
+                        side="top"
+                        className={
+                          "max-w-xs bg-background/95 backdrop-blur-md p-3 z-50 " +
+                          (isML ? "border-primary/30" : "border-secondary/30")
+                        }
+                      >
+                        <p className={"font-semibold mb-1 " + (isML ? "text-primary" : "text-secondary")}>
+                          {skill.name}
+                        </p>
+                        <p className="text-sm text-muted-foreground">{skill.description}</p>
+                      </TooltipContent>
+                    </Tooltip>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+
+          {/* Group key */}
+          <div className="absolute -bottom-4 left-1/2 -translate-x-1/2 flex gap-6 text-xs">
+            <div className="flex items-center gap-2">
+              <div className="w-3 h-3 rounded-full bg-primary/50" />
+              <span className="text-muted-foreground">ML &amp; AI</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <div className="w-3 h-3 rounded-full bg-secondary/50" />
+              <span className="text-muted-foreground">Responsible AI</span>
             </div>
           </div>
         </div>
-
-        {/* ML Skills - Inner orbit */}
-        <div 
-          className={`absolute inset-0 ${isPaused ? "" : "animate-spin-slow"}`}
-          style={{ animationPlayState: isPaused ? "paused" : "running" }}
-        >
-          {mlSkills.map((skill, index) => {
-            const angle = (index / mlSkills.length) * 2 * Math.PI - Math.PI / 2;
-            const x = Math.cos(angle) * innerRadius;
-            const y = Math.sin(angle) * innerRadius;
-
-            return (
-              <div
-                key={skill.name}
-                className="absolute top-1/2 left-1/2"
-                style={{
-                  marginLeft: x,
-                  marginTop: y,
-                }}
-              >
-                <div
-                  className={isPaused ? "" : "animate-spin-slow-reverse"}
-                  style={{ animationPlayState: isPaused ? "paused" : "running" }}
-                >
-                  <TooltipProvider delayDuration={0}>
-                    <Tooltip open={selectedSkill === skill.name}>
-                      <TooltipTrigger asChild>
-                        <div
-                          data-skill-node
-                          className={`
-                            transition-all duration-300 cursor-pointer
-                            ${selectedSkill === skill.name ? "scale-125 z-20" : "scale-100"}
-                            ${isVisible ? "opacity-100" : "opacity-0"}
-                          `}
-                          style={{ transitionDelay: `${index * 50}ms` }}
-                          onClick={(e) => handleSkillClick(skill.name, e)}
-                        >
-                          <div className={`
-                            px-3 py-2 rounded-full glass flex items-center gap-2
-                            border border-primary/30 bg-background/80
-                            hover:bg-primary/20 hover:border-primary/50
-                            hover:shadow-lg hover:shadow-primary/20
-                            transition-all duration-300
-                            ${selectedSkill === skill.name ? "ring-2 ring-primary/50 bg-primary/20" : ""}
-                          `}>
-                            <span className="text-primary">{skill.icon}</span>
-                            <span className="text-xs font-medium text-foreground whitespace-nowrap">
-                              {skill.name}
-                            </span>
-                          </div>
-                        </div>
-                      </TooltipTrigger>
-                      <TooltipContent 
-                        side="top" 
-                        className="max-w-xs bg-background/95 backdrop-blur-md border-primary/30 p-3 z-50"
-                      >
-                        <p className="font-semibold text-primary mb-1">{skill.name}</p>
-                        <p className="text-sm text-muted-foreground">{skill.description}</p>
-                      </TooltipContent>
-                    </Tooltip>
-                  </TooltipProvider>
-                </div>
-              </div>
-            );
-          })}
-        </div>
-
-        {/* Responsible AI Skills - Outer orbit */}
-        <div 
-          className={`absolute inset-0 ${isPaused ? "" : "animate-spin-slow-reverse"}`}
-          style={{ animationPlayState: isPaused ? "paused" : "running" }}
-        >
-          {responsibleSkills.map((skill, index) => {
-            const angle = (index / responsibleSkills.length) * 2 * Math.PI - Math.PI / 2;
-            const x = Math.cos(angle) * outerRadius;
-            const y = Math.sin(angle) * outerRadius;
-
-            return (
-              <div
-                key={skill.name}
-                className="absolute top-1/2 left-1/2"
-                style={{
-                  marginLeft: x,
-                  marginTop: y,
-                }}
-              >
-                <div
-                  className={isPaused ? "" : "animate-spin-slow"}
-                  style={{ animationPlayState: isPaused ? "paused" : "running" }}
-                >
-                  <TooltipProvider delayDuration={0}>
-                    <Tooltip open={selectedSkill === skill.name}>
-                      <TooltipTrigger asChild>
-                        <div
-                          data-skill-node
-                          className={`
-                            transition-all duration-300 cursor-pointer
-                            ${selectedSkill === skill.name ? "scale-125 z-20" : "scale-100"}
-                            ${isVisible ? "opacity-100" : "opacity-0"}
-                          `}
-                          style={{ transitionDelay: `${(mlSkills.length + index) * 50}ms` }}
-                          onClick={(e) => handleSkillClick(skill.name, e)}
-                        >
-                          <div className={`
-                            px-3 py-2 rounded-full glass flex items-center gap-2
-                            border border-secondary/30 bg-background/80
-                            hover:bg-secondary/20 hover:border-secondary/50
-                            hover:shadow-lg hover:shadow-secondary/20
-                            transition-all duration-300
-                            ${selectedSkill === skill.name ? "ring-2 ring-secondary/50 bg-secondary/20" : ""}
-                          `}>
-                            <span className="text-secondary">{skill.icon}</span>
-                            <span className="text-xs font-medium text-foreground whitespace-nowrap">
-                              {skill.name}
-                            </span>
-                          </div>
-                        </div>
-                      </TooltipTrigger>
-                      <TooltipContent 
-                        side="top" 
-                        className="max-w-xs bg-background/95 backdrop-blur-md border-secondary/30 p-3 z-50"
-                      >
-                        <p className="font-semibold text-secondary mb-1">{skill.name}</p>
-                        <p className="text-sm text-muted-foreground">{skill.description}</p>
-                      </TooltipContent>
-                    </Tooltip>
-                  </TooltipProvider>
-                </div>
-              </div>
-            );
-          })}
-        </div>
-
-        {/* Group labels */}
-        <div className="absolute -bottom-4 left-1/2 -translate-x-1/2 flex gap-6 text-xs">
-          <div className="flex items-center gap-2">
-            <div className="w-3 h-3 rounded-full bg-primary/50" />
-            <span className="text-muted-foreground">ML & AI</span>
-          </div>
-          <div className="flex items-center gap-2">
-            <div className="w-3 h-3 rounded-full bg-secondary/50" />
-            <span className="text-muted-foreground">Responsible AI</span>
-          </div>
-        </div>
-      </div>
+      </TooltipProvider>
     );
   };
 
