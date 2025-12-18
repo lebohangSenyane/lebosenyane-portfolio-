@@ -31,8 +31,11 @@ const AboutSection = () => {
             </p>
           </div>
 
-          <p className="text-muted-foreground max-w-md text-lg">
-            Passionate about AI, machine learning, and building intelligent solutions that transform how we interact with technology.
+          <p className="text-muted-foreground max-w-lg text-lg leading-relaxed">
+            AI Engineer specializing in machine learning, natural language processing, and intelligent automation. 
+            With hands-on experience building RAG-powered chatbots, classification models, and data-driven solutions, 
+            I'm dedicated to leveraging cutting-edge AI technologies to solve complex real-world challenges 
+            and drive meaningful innovation.
           </p>
 
           {/* Buttons */}
