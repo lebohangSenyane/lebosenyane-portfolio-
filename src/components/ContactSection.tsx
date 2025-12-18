@@ -41,7 +41,7 @@ const ContactSection = () => {
               </div>
             </a>
 
-            <div className="glass p-6 rounded-2xl flex flex-col items-center gap-4">
+            <div className="glass p-6 rounded-2xl flex flex-col items-center gap-4 transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-primary/20">
               <div className="w-14 h-14 rounded-full gradient-bg flex items-center justify-center">
                 <MapPin size={24} className="text-primary-foreground" />
               </div>
