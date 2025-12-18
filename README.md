@@ -1,73 +1,64 @@
-# Welcome to your Lovable project
+# Lebo Senyane — AI  Powered Portfolio
 
-## Project info
+### Welcome to my portfolio project! This app showcases my skills in AI integration, frontend development, and deployment using Lovable.
 
-**URL**: https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID
+## 🌐 Live Demo
 
-## How can I edit this code?
+Explore the live version of the app here:
+🔗 https://lebosenyane.lovable.app/
 
-There are several ways of editing your application.
+## About This Project
 
-**Use Lovable**
+This is an AI-powered interactive web application built using Lovable. It demonstrates:
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and start prompting.
+AI prompt integration
 
-Changes made via Lovable will be committed automatically to this repo.
+User-friendly UI/UX
 
-**Use your preferred IDE**
+Web deployment best practices
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+APIs and responsive design
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+This project serves as a showcase of my technical capabilities and an example of how I build and publish practical web applications.
 
-Follow these steps:
+## 🛠 Built With
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+Lovable – AI interface builder and deploy platform
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+HTML / CSS / JavaScript – Front-end design and logic
 
-# Step 3: Install the necessary dependencies.
-npm i
+AI API – Intelligent responses and interactive behavior
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
-```
+Auto-generated domain – Simple and sharable link
 
-**Edit a file directly in GitHub**
+## 🚀 Features
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+✔️ AI-driven user experience
+✔️ Clean and responsive layout
+✔️ Live hosting and deployment
+✔️ Easy to share and present
 
-**Use GitHub Codespaces**
+## 📂 How to Use
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+Visit the live app link:
 
-## What technologies are used for this project?
+https://lebosenyane.lovable.app/
 
-This project is built with:
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+Explore the interface
 
-## How can I deploy this project?
+Interact with AI features
 
-Simply open [Lovable](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and click on Share -> Publish.
+Review how prompts and responses are handled
 
-## Can I connect a custom domain to my Lovable project?
 
-Yes, you can!
+## This project highlights my:
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
+Ability to integrate AI tools into web products
 
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
+Skills in frontend development and usability
+
+Capability to deploy and publish real projects
+
+Focus on creating portfolio-ready deliverables
+
