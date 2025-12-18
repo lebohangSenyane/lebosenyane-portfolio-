@@ -23,7 +23,7 @@ const CertificationsSection = () => {
               <Award size={40} className="text-primary-foreground" />
             </div>
             <div className="space-y-2">
-              <h3 className="text-xl font-semibold">FNB Academy Certificates & Badges</h3>
+              <h3 className="text-xl font-semibold">Certificates & Badges</h3>
               <p className="text-muted-foreground text-sm">
                 View my professional certifications and achievements
               </p>

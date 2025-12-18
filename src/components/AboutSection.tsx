@@ -27,14 +27,14 @@ const AboutSection = () => {
               Lebohang Senyane
             </h1>
             <p className="text-2xl md:text-3xl font-semibold gradient-text">
-              AI Engineer
+              AI/ML Engineer
             </p>
           </div>
 
           <p className="text-muted-foreground max-w-lg text-lg leading-relaxed">
             AI Engineer specializing in machine learning, natural language processing, and intelligent automation. 
-            With hands-on experience building RAG-powered chatbots, classification models, and data-driven solutions, 
-            I'm dedicated to leveraging cutting-edge AI technologies to solve complex real-world challenges 
+            With hands on experience building RAG powered chatbots, classification models, and data driven solutions, 
+            I'm dedicated to leveraging cutting edge AI technologies to solve complex real world challenges 
             and drive meaningful innovation.
           </p>
 
