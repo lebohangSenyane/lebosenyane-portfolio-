@@ -41,7 +41,7 @@ const AboutSection = () => {
           {/* Buttons */}
           <div className="flex flex-wrap items-center justify-center lg:justify-start gap-4">
             <a 
-              href="https://docs.google.com/document/d/13f173z33JNONhLJiDbkwADtgNhFOgN54xO4M07DEeag/edit?usp=sharing"
+              href="https://docs.google.com/document/d/1nLIS93zEky-Ynsh9oYYYhpsTsnlGIKhepb0uytkFxmE/edit?tab=t.0"
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-2 px-6 py-3 rounded-full border-2 border-foreground/20 font-medium transition-all duration-300 hover:bg-foreground hover:text-background hover:border-foreground"

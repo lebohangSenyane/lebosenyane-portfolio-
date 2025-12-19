@@ -9,11 +9,11 @@ const projects = [
     tags: ["No-Code", "AI", "Education"],
   },
   {
-    title: "AI Creative Writing Assistant",
+    title: "Bias Analysis",
     description:
-      "AI-powered generative content creator for crafting original poems and short stories, leveraging advanced language models to inspire creativity and storytelling.",
-    link: "https://ai-creative-writing-assistant.vercel.app/",
-    tags: ["AI", "NLP", "Creative"],
+      "Conducted a bias audit on a machine learning dataset/model using quantitative fairness metrics, statistical testing, and visual analysis. Applied bias mitigation techniques, compared model performance pre- and post-mitigation, and developed ethical and real-world impact recommendations.",
+    link: "https://github.com/lebohangSenyane/BIAS-in-COMPAS-SCORES/blob/main/COMPAS_Bias_Audit_VERSION1_(2)%20(3).ipynb",
+    tags: ["AI", "Fairness", "Ethics"],
   },
   {
     title: "AI Resume Builder",
@@ -26,7 +26,7 @@ const projects = [
     title: "RAG Student Chatbot",
     description:
       "Built a student-focused RAG chatbot integrating multiple AI APIs, featuring a user-friendly interface, persistent data storage, and robust error handling.",
-    link: "https://studio.firebase.google.com/studio-5317777344",
+    link: "https://studio--studio-5317777344-b8ab7.us-central1.hosted.app/dashboard",
     tags: ["RAG", "Chatbot", "Firebase"],
   },
 ];
