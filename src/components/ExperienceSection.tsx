@@ -1,6 +1,7 @@
 const experiences = [
   {
     title: "Digital Associate",
+    company: "CAPACITI",
     period: "October 2025 - Present",
     description:
       "Completed an AI Bootcamp focused on applied machine learning concepts, prompt engineering and building practical AI-driven solutions that solve real world problems.",
@@ -8,6 +9,7 @@ const experiences = [
   },
   {
     title: "Residence Mentor",
+    company: "Central University of Technology",
     period: "March 2024 - November 2024",
     description:
       "Led mentorship for 30+ first-year residence students in Digital Literacy, Software Development, and IT Mathematics, fostering a supportive learning environment that helped over 85% improve academic performance through structured study groups and one-on-one support.",
@@ -15,6 +17,7 @@ const experiences = [
   },
   {
     title: "Student Assistant",
+    company: "Central University of Technology",
     period: "March 2023 - November 2023",
     description:
       "Assisted students with computer, software, and lab access issues, performing basic troubleshooting that reduced IT support escalations by 30%.",
@@ -69,6 +72,7 @@ const ExperienceSection = () => {
                   <h3 className="text-xl font-semibold gradient-text">
                     {exp.title}
                   </h3>
+                  <p className="text-sm font-medium text-primary">{exp.company}</p>
                   <p className="text-muted-foreground leading-relaxed text-sm">
                     {exp.description}
                   </p>
